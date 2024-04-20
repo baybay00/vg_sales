@@ -32,7 +32,7 @@ const Query = (props) => {
                     onChange={queryHandler}
                     className="m-2 p-2 rounded-lg border border-white h-48 w-96"
                 />
-                <button type="submit" className="m-2 p-2 bg-white text-navy rounded-lg">Submit</button>
+                <button type="submit" className="m-2 p-2 bg-white text-navy rounded-lg bg-b">Submit</button>
             </form>
         </div>
     )
