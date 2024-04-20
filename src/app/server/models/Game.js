@@ -1,11 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../app')
+const { DataTypes } = require('sequelize')
 
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'mysql',
-});
-
-// Define your model
 const Game = sequelize.define('Game', {
     title: {
         type: DataTypes.STRING,
@@ -37,9 +32,4 @@ const Game = sequelize.define('Game', {
     },
 });
 
-// Sync the model with the database (create the table if it doesn't exist)
-Game.sync({ force: true }).then(() => {
-    console.log('Game table created');
-}).catch(err => {
-    console.error('Error creating Game table:', err);
-});
+module.exports = Game;
