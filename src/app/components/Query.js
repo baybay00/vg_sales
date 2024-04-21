@@ -16,10 +16,13 @@ const Query = (props) => {
 
     const submitHandler = async  (e) => {
         e.preventDefault();
+        console.log('submit handler')
         try {
-            const response = await axios.post('/api/games/results', {query: enteredQuery});
+            const response = await axios.post('http://localhost:8080/api/games/results', {query: enteredQuery});
             setQueryResults(response.data);
+            console.log( 'data', response.data)
             setShowResults(true)
+            setEnteredQuery('')
         } catch (error) {
             console.error('Error fetching query results:', error);
         }
@@ -31,8 +34,8 @@ const Query = (props) => {
             <table className="border border-tan">
                 <thead>
                 <tr>
-                    <th className="p-1 border border-tan">Rank</th>
-                    <th className="p-1 border border-tan">Name</th>
+                    <th className="p-1 border border-tan">Place</th>
+                    <th className="p-1 border border-tan">Title</th>
                     <th className="p-1 border border-tan">Platform</th>
                     <th className="p-1 border border-tan">Year</th>
                     <th className="p-1 border border-tan">Genre</th>
