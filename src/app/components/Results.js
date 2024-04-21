@@ -1,7 +1,6 @@
 'use client';
-import Query from "@/app/components/Query";
-export default function ResultTable({queryResults}){
 
+export default function ResultTable({queryResults}){
 
     return (
         <div>
