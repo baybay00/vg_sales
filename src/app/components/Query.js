@@ -16,11 +16,10 @@ const Query = (props) => {
 
     const submitHandler = async  (e) => {
         e.preventDefault();
-        console.log('submit handler')
+
         try {
             const response = await axios.post('http://localhost:8080/api/games/results', {query: enteredQuery});
             setQueryResults(response.data);
-            console.log( 'data', response.data)
             setShowResults(true)
             setEnteredQuery('')
         } catch (error) {
@@ -31,7 +30,7 @@ const Query = (props) => {
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-navy text-white">
             <p className="text-xl p-2 text-beige">Example tuples. Sales are in millions and table should be referred to as vgsales.</p>
-            <table className="border border-tan">
+            <table className="border border-tan mb-2">
                 <thead>
                 <tr>
                     <th className="p-1 border border-tan">Place</th>
