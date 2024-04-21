@@ -1,25 +1,26 @@
 'use client';
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Query = (props) => {
 
-    const router = useRouter()
     const [enteredQuery, setEnteredQuery] = useState('')
+    const [queryResults, setQueryResults] = useState([])
 
     const queryHandler = (e) => {
         setEnteredQuery(e.target.value)
+        props.queryHandler(e)
     }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
-
-        const query = {
-            query: enteredQuery
+    const submitHandler = async  (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.get(`/api/games/results?query=${enteredQuery}`);
+            setQueryResults(response.data);
+        } catch (error) {
+            console.error('Error fetching query results:', error);
         }
-        props.onQuery(query)
-        router.push('/query')
     }
 
     return (
@@ -93,16 +94,24 @@ const Query = (props) => {
 
             </table>
 
-            <p className="p-2 text-beige">Please enter a query.</p>
             <form className="flex flex-col items-center" onSubmit={ submitHandler }>
                 <input
                     type="text"
                     value={ enteredQuery }
                     onChange={ queryHandler }
-                    className="m-2 p-2 rounded-lg border border-white h-48 w-96"
+                    placeholder="Enter a query"
+                    className="m-2 p-2 rounded-lg border border-white h-48 w-96 text-navy"
+
                 />
                 <button type="submit" className="m-2 p-2 text-navy rounded-lg bg-beige">Submit</button>
             </form>
+            <div>
+                { queryResults.map((game) => (
+                    <div key={ game.id }>
+                        <p>{ game.title }</p>
+                    </div>
+                )) }
+            </div>
         </div>
     )
 }
