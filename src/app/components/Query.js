@@ -1,5 +1,5 @@
 'use client';
-
+import ResultTable from "@/app/components/Results";
 import { useState } from "react";
 import axios from "axios";
 
@@ -16,7 +16,7 @@ const Query = (props) => {
     const submitHandler = async  (e) => {
         e.preventDefault();
         try {
-            const response = await axios.get(`/api/games/results?query=${enteredQuery}`);
+            const response = await axios.post('/api/games', {query: enteredQuery});
             setQueryResults(response.data);
         } catch (error) {
             console.error('Error fetching query results:', error);
@@ -25,7 +25,7 @@ const Query = (props) => {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-navy text-white">
-            <p className="text-xl p-2 text-beige">Example entries. Sales in millions.</p>
+            <p className="text-xl p-2 text-beige">Example tuples. Sales are in millions and table should be referred to as vgsales.</p>
             <table className="border border-tan">
                 <thead>
                 <tr className="border border-tan">
@@ -105,13 +105,7 @@ const Query = (props) => {
                 />
                 <button type="submit" className="m-2 p-2 text-navy rounded-lg bg-beige">Submit</button>
             </form>
-            <div>
-                { queryResults.map((game) => (
-                    <div key={ game.id }>
-                        <p>{ game.title }</p>
-                    </div>
-                )) }
-            </div>
+            <ResultTable queryResults={queryResults}/>
         </div>
     )
 }

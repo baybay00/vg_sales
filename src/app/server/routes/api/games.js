@@ -1,32 +1,23 @@
-const express = require('express')
-const router = express.Router()
-const bodyParser = require('body-parser')
+const express = require('express');
+const router = express.Router();
+const { QueryTypes } = require('sequelize');
 
-const Game = require('../../models/Game')
+const sequelize = require('../../db')
 
+// Define middleware to parse JSON bodies
+router.use(express.json());
 
+// Define the route handler for fetching game results
+router.post('/results', async (req, res) => {
+    const {query} = req.body;
 
-router.use(bodyParser.json())
-
-router.get('/results', (req, res) => {
-    const query = req.query.query
-
-    Game.findAll({
-        where: {
-
-        }
-    })
-        .then((games) => {
-        if(games.length > 0) {
-            res.json(games)
-        } else {
-            res.status(404).json({nogamesfound: 'No results'})
-        }
-    })
-        .catch((err) => {
-            console.error('Error fetching games', err)
-            res.status(500).json({error: 'Server error'})
-        })
+    try{
+        const results = await sequelize.query(query, {type: QueryTypes.SELECT})
+        res.json(results)
+    } catch(error){
+        console.error('error executing query', error)
+        res.status(500).json({error: 'an error occurred while executing query'})
+    }
 })
 
 module.exports = router;

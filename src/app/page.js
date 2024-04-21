@@ -17,7 +17,7 @@ export default function Home() {
     }
     const submitQuery = (query) => {
         console.log("Submitted Query:", query);
-        router.push('/query');
+        router.push('/results');
     }
 return (
     <div>

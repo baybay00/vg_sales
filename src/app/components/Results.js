@@ -1,6 +1,6 @@
 'use client';
-
-export default function ResultTable(){
+import Query from "@/app/components/Query";
+export default function ResultTable({queryResults}){
 
 
     return (
