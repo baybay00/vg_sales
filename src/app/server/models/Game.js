@@ -2,6 +2,9 @@ const sequelize = require('../db')
 const { DataTypes } = require('sequelize')
 
 const Game = sequelize.define('Game', {
+    rank: {
+      type: DataTypes.INTEGER
+    },
     title: {
         type: DataTypes.STRING,
         allowNull: false

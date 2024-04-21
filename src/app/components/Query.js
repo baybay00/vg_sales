@@ -7,6 +7,7 @@ const Query = (props) => {
 
     const [enteredQuery, setEnteredQuery] = useState('')
     const [queryResults, setQueryResults] = useState([])
+    const [showResults, setShowResults] = useState(false)
 
     const queryHandler = (e) => {
         setEnteredQuery(e.target.value)
@@ -16,8 +17,9 @@ const Query = (props) => {
     const submitHandler = async  (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/games', {query: enteredQuery});
+            const response = await axios.post('/api/games/results', {query: enteredQuery});
             setQueryResults(response.data);
+            setShowResults(true)
         } catch (error) {
             console.error('Error fetching query results:', error);
         }
@@ -28,7 +30,7 @@ const Query = (props) => {
             <p className="text-xl p-2 text-beige">Example tuples. Sales are in millions and table should be referred to as vgsales.</p>
             <table className="border border-tan">
                 <thead>
-                <tr className="border border-tan">
+                <tr>
                     <th className="p-1 border border-tan">Rank</th>
                     <th className="p-1 border border-tan">Name</th>
                     <th className="p-1 border border-tan">Platform</th>
@@ -42,7 +44,7 @@ const Query = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr className="border border-tan">
+                <tr>
                     <td className="border border-tan p-1">1</td>
                     <td className="border border-tan p-1">Wii Sports</td>
                     <td className="border border-tan p-1">Wii</td>
@@ -105,7 +107,7 @@ const Query = (props) => {
                 />
                 <button type="submit" className="m-2 p-2 text-navy rounded-lg bg-beige">Submit</button>
             </form>
-            <ResultTable queryResults={queryResults}/>
+            {showResults && <ResultTable queryResults={queryResults}/>}
         </div>
     )
 }
