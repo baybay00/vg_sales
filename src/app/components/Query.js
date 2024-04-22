@@ -27,6 +27,9 @@ const Query = (props) => {
         }
     }
 
+    const columns = ["Place", "Title", "Platform", "Year", "Genre", "Publisher", "NA_Sales", "EU_Sales",
+        "JP_Sales", "Other_Sales"]
+
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-navy text-white">
             <p className="text-xl p-2 text-beige">Example tuples. Sales are in millions and table should be referred to as vgsales.</p>
@@ -109,7 +112,7 @@ const Query = (props) => {
                 />
                 <button type="submit" className="m-2 p-2 text-navy rounded-lg bg-beige">Submit</button>
             </form>
-            {showResults && <ResultTable queryResults={queryResults}/>}
+            {showResults && <ResultTable queryResults={queryResults} columns={columns}/>}
         </div>
     )
 }

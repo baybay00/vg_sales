@@ -10,7 +10,7 @@ export default function Home() {
 
     const router = useRouter()
 
-    const [enteredQuery, setEnteredQuery] = useState('')
+    const [, setEnteredQuery] = useState('')
 
     const queryChangeHandler = (e) => {
         setEnteredQuery(e.target.value)
@@ -19,6 +19,7 @@ export default function Home() {
         console.log("Submitted Query:", query);
         router.push('/results');
     }
+
 return (
     <div>
         <Head>
@@ -32,3 +33,5 @@ return (
     </div>
     )
 }
+
+// SELECT Title FROM vgsales WHERE Platform= "NES"
