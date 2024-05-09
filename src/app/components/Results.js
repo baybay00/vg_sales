@@ -1,6 +1,15 @@
 'use client';
+// ResultTable component
+// ResultTable.js
+import React from "react";
 
-export default function ResultTable({queryResults, columns}){
+function ResultTable({ queryResults }) {
+    if (!queryResults || queryResults.length === 0) {
+        return <div>No results to display</div>;
+    }
+
+    const columns = Object.keys(queryResults[0]);
+
     return (
         <div className="overflow-auto">
             <h2 className="text-xl mb-4 text-beige">Query Results</h2>
@@ -8,7 +17,9 @@ export default function ResultTable({queryResults, columns}){
                 <thead>
                 <tr className="border border-tan">
                     {columns.map((column, index) => (
-                        <th key ={index} className="p-1 border border-tan">{ column }</th>
+                        <th key={index} className="p-1 border border-tan">
+                            {column}
+                        </th>
                     ))}
                 </tr>
                 </thead>
@@ -16,8 +27,10 @@ export default function ResultTable({queryResults, columns}){
                 {queryResults.map((result, rowIndex) => (
                     <tr key={rowIndex} className="border border-tan">
                         {columns.map((column, colIndex) => (
-                            <td key={colIndex} className="p-1 border border-tan">{ result[column] }</td>
-                        )) }
+                            <td key={colIndex} className="p-1 border border-tan">
+                                {result[column]}
+                            </td>
+                        ))}
                     </tr>
                 ))}
                 </tbody>
@@ -26,3 +39,4 @@ export default function ResultTable({queryResults, columns}){
     );
 }
 
+export default ResultTable;
