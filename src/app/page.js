@@ -33,5 +33,3 @@ return (
     </div>
     )
 }
-
-// SELECT Title FROM vgsales WHERE Platform= "NES"

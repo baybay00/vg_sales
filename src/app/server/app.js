@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 8080
-const {Sequelize} = require('sequelize')
 const cors = require('cors')
 const games = require('./routes/api/games')
 
